@@ -408,6 +408,7 @@
         group1 {
             psels = MOUSE_I2C_PIN_SDA_PINCTRL, 
                     MOUSE_I2C_PIN_SCL_PINCTRL;
+			bias-pull-up;
         };
     };
 
@@ -428,7 +429,7 @@
     touchpad: mxt112s@4b {
         compatible = "atmel,maxtouch";
         reg = <0x4b>;
-        irq-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        //irq-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
 
