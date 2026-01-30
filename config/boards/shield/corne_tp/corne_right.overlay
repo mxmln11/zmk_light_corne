@@ -60,8 +60,8 @@
 //
 // Here we use D2 (P0.17) for SDA and D3 (P0.20) for SCL,
 // because we use the footstan corne layout and the standard display pin socket
-#define MOUSE_I2C_PIN_SCL_PRO_MICRO <&pro_micro 3 GPIO_ACTIVE_HIGH>
-#define MOUSE_I2C_PIN_SDA_PRO_MICRO <&pro_micro 2 GPIO_ACTIVE_HIGH>
+// #define MOUSE_I2C_PIN_SCL_PRO_MICRO <&pro_micro 3 GPIO_ACTIVE_HIGH>
+// #define MOUSE_I2C_PIN_SDA_PRO_MICRO <&pro_micro 2 GPIO_ACTIVE_HIGH>
 
 // Configure the Power-On-Reset pin
 //
@@ -170,53 +170,6 @@
 
 //#define MOUSE_I2C_PIN_UNEXPOSED_TX <NRF_PSEL(UART_TX, 0, 27)>
 //#define MOUSE_I2C_PIN_UNEXPOSED_RX <NRF_PSEL(UART_RX, 0, 28)>
-
-// Adjust GPIO interrupt priority to the highest level.
-//
-// IMPORTANT TLDR:
-// If you are using the nice_nano_v2 board, you don't need to make changes to
-// the config below and can leave it as it is.
-//
-// Explanation of these settings:
-//
-// PS/2 events must be processed within 30-50us, but frequently bluetooth and
-// other interrupts take longer to finish.
-//
-// Therefore we change the default GPIO priority to the highest level (0) and
-// demote all BT interrupt priorities by one level using the kconfig settings:
-// - CONFIG_BT_CTLR_LLL_PRIO 1
-// - CONFIG_BT_CTLR_ULL_HIGH_PRIO 2
-// - CONFIG_BT_CTLR_ULL_LOW_PRIOCONFIG 2
-//
-// These config options are enabled automatically by the PS2 UART and GPIO
-// drivers... so you don't have to enable them manually.
-//
-// Then we lower the interrupt priority of all other devices by 2 levels using
-// the devicetree config below.
-//
-// This allows the PS/2 interrupts to be triggered faster and reduces
-// transmission errors.
-//
-// If you are using the nice_nano_v2 board, you can reuse my config below.
-//
-// Otherwise, you can generate the interrupt overrides using this script:
-// https://github.com/infused-kim/kb_zmk_ps2_mouse_trackpoint_driver/blob/main/scripts/gen_interrupt_priority_overrides.py
-//
-// Make sure to do it on a zephyr.dts where the interrupts have not been
-// adjusted yet (i.e. a config that doesn't have the the following options
-// enabled).
-//
-// If you are building using a toolchain you can find the zephyr.dts in the
-// build directory, which by default is: `app/build/zephyr/zephyr.dts`
-//
-// If you are building using the github actions, copy the output of the build
-// step `xxxx_right - nice_nano_v2 Devicetree file` into a file and run the
-// script on it.
-
-// gpiote should have the highest interrupt priority (0)
-&gpiote {
-    interrupts = < 6 0 >;
-};
 
 // Adjust GPIO interrupt priority to the highest level.
 //
@@ -461,43 +414,37 @@
     i2c0_sleep: i2c0_sleep {
         group1 {
             psels = MOUSE_I2C_PIN_SDA_PINCTRL,
-                <NRF_PSEL(TWIM_SCL, 0, 27)>;
+                	MOUSE_I2C_PIN_SCL_PINCTRL;
             low-power-enable;
         };
     };
 };
 
-&pro_micro_i2c {
+&i2c {
+	status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-names = "default";
 
+    touchpad: mxt112s@4b {
+        compatible = "atmel,maxtouch";
+        reg = <0x4b>;
+        irq-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    };
 };
-/ {
-    gpio_i2c: gpio_i2c {
-        status = "disabled";
 
-        compatible = "gpio-i2c";
-        scl-gpios = MOUSE_I2C_PIN_SCL_PRO_MICRO;
-        sda-gpios = MOUSE_I2C_PIN_SDA_PRO_MICRO;
+/ {
+    /* Container for split input nodes */
+    split_inputs {
+        compatible = "zmk,input-split-container";
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        /* This node sends events to the central side */
+        touchpad_split: touchpad_split@0 {
+            compatible = "zmk,input-split";
+            reg = <0>; // Unique ID for this peripheral pointer
+            device = <&touchpad>;
         };
     };
-
-
-/ {
-    mouse_i2c: mouse_i2c {
-		status = "disabled";
-        compatible = "zmk,input-mouse-i2c";
-
-	    i2c-device = <&gpio_i2c>;
-//rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
-    };
-
-    mouse_i2c_input_listener: mouse_i2c_input_listener {
-        compatible = "zmk,input-split";
-        status = "disabled";
-
-        device = <&mouse_i2c>;
-
-		// Some of the available settings depend on the keymap. So they
-		// are adjusted in...
-		// zmk-config/config/includes/mouse_tp.dtsi
-    };
 };
+
