@@ -16,3 +16,24 @@
         , <&pro_micro 14 GPIO_ACTIVE_HIGH>
         ;
 };
+
+
+/ {
+    split_inputs {
+        compatible = "zmk,input-split-container";
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        /* Matching ID from the peripheral */
+        touchpad_split: touchpad_split@0 {
+            compatible = "zmk,input-split";
+            reg = <0>;
+        };
+    };
+
+    /* Listener on central side to handle the split events */
+    touchpad_listener {
+        compatible = "zmk,input-listener";
+        device = <&touchpad_split>;
+    };
+};
