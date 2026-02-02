@@ -92,7 +92,8 @@
 &i2c0 {
 	status = "okay";
     pinctrl-0 = <&i2c0_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
 
     touchpad: glidepoint@2a {
         compatible = "atmel,maxtouch";
