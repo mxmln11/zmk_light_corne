@@ -102,18 +102,4 @@
     };
 };
 
-/ {
-    /* Container for split input nodes */
-    split_inputs {
-        compatible = "zmk,input-split-container";
-        #address-cells = <1>;
-        #size-cells = <0>;
 
-        /* This node sends events to the central side */
-        touchpad_split: touchpad_split@0 {
-            compatible = "zmk,input-split";
-            reg = <0>; // Unique ID for this peripheral pointer
-            device = <&touchpad>;
-        };
-    };
-};
