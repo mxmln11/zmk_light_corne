@@ -2,20 +2,22 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: petejohanson
+      url-base: https://github.com/
     - name: m165437 #new entry
       url-base: https://github.com/M165437 #new entry
-    - name: george-norton
-      url-base: https://github.com/goerge-norton
+
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: v0.3
       import: app/west.yml
+    - name: zmk-pointing
+      remote: petejohanson
+      revision: main     # Enthält die notwendigen Glidepoint-Treiber
     - name: nice-view-gem #new entry
       remote: m165437 #new entry
-      revision: v0.3.0 #new entry
-    - name: zmk-maxtouch-module
-      remote: george-norton
-      revision: v0.3.0
+      revision: main #new entry
+      
   self:
     path: config
