@@ -1,0 +1,119 @@
+/*
+ * Copyright (c) 2020 Pete Johanson
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "corne.dtsi"
+
+&default_transform {
+    col-offset = <6>;
+};
+
+&five_column_transform {
+    col-offset = <6>;
+};
+
+&kscan0 {
+    col-gpios
+        = <&pro_micro 14 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 18 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 19 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 20 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 21 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+/* I2C Mouse/Touchpad - User Configuration
+ *
+ * Enable I2C drivers on this side of the keyboard.
+ * It MUST be the central half. If you connected your TP or mouse to the
+ * left side, then move the following content to `your_keyboard_left.overlay`
+ *
+ * You also need to adjust `Kconfig.defconfig` and configure that this side
+ * is the central side. Should work without in newer ZMK
+ */
+
+#define MOUSE_DRIVER_I2C
+
+// Configure SDA pin using the pinctrl notation
+//
+// Now configure SDA pin using the pinctrl notation. Make sure to use the same
+// pin as in the pro micro notation, but convert it to the pinctrl notation.
+//
+// For the nice!nano you can find it on their pinout schematic, next to the
+// pins, in the blue or violet boxes, with a format like `PX.YY` (P0.09).
+//
+// Enter it like `X, Y` without leading zeroes.
+//
+// Examples:
+//      D1  - P0.06: 0, 6
+// 		D0  - P0.08: 0, 8
+//		D15 - P1.13: 1, 13
+//		D16 - P0.10: 0, 10
+//		D10 - P0.09: 0, 9
+//
+// We don't define the SCL pin, because UART uses a baud rate instead of
+// a clock pin.
+#define MOUSE_I2C_PIN_SCL_PINCTRL <NRF_PSEL(TWIM_SCL, 0, 20)>
+#define MOUSE_I2C_PIN_SDA_PINCTRL <NRF_PSEL(TWIM_SDA, 0, 17)>
+
+
+/*
+ * I2C Mouse / Touchpad - Device Definitions
+ *
+ * WARNING: Do not change anything beyond here unless you know what you are
+ *          doing.
+ */
+// This define can be used in the keymap file to check whether the device tree
+// configs in this file are present to void build errors on the side that does
+// not have the mouse or TP
+#define MOUSE_I2C_DT_PRESENT
+&pinctrl {
+    /* configuration for i2c0 device, default state */
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = MOUSE_I2C_PIN_SDA_PINCTRL, 
+                    MOUSE_I2C_PIN_SCL_PINCTRL;
+			bias-pull-up;
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = MOUSE_I2C_PIN_SDA_PINCTRL,
+                	MOUSE_I2C_PIN_SCL_PINCTRL;
+            low-power-enable;
+        };
+    };
+};
+
+&i2c0 {
+	status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-names = "default";
+
+    touchpad: glidepoint@2a {
+        compatible = "atmel,maxtouch";
+        reg = <0x2a>;;
+        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+		status = "okay";
+    };
+};
+
+/ {
+    /* Container for split input nodes */
+    split_inputs {
+        compatible = "zmk,input-split-container";
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        /* This node sends events to the central side */
+        touchpad_split: touchpad_split@0 {
+            compatible = "zmk,input-split";
+            reg = <0>; // Unique ID for this peripheral pointer
+            device = <&touchpad>;
+        };
+    };
+};
