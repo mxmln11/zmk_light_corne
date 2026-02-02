@@ -96,7 +96,7 @@
     pinctrl-names = "default", "sleep";
 
     touchpad: glidepoint@2a {
-        compatible = "atmel,maxtouch";
+        compatible = "cirque,glidepoint";
         reg = <0x2a>;
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 		status = "okay";
