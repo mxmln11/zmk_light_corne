@@ -98,7 +98,7 @@
     touchpad: glidepoint@2a {
         compatible = "atmel,maxtouch";
         reg = <0x2a>;
-        irq-gpios = <&gpio0 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 		status = "okay";
     };
 };
