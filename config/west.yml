@@ -17,7 +17,7 @@ manifest:
     #  revision: main     # Enthält die notwendigen Glidepoint-Treiber
     - name: nice-view-gem #new entry
       remote: m165437 #new entry
-      revision: main #new entry
+      revision: v0.3.0 #main #new entry
       
   self:
     path: config
