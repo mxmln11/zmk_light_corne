@@ -1,4 +1,4 @@
-#include <../boards/shields/corne/boards/nice_nano_v2.overlay>
+//#include <../boards/shields/corne/boards/nice_nano_v2.overlay>
 /*
  * Copyright (c) 2020 The ZMK Contributors
  *
