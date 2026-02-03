@@ -93,7 +93,7 @@
 &i2c0 {
 	status = "okay";
     pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
 
     touchpad: glidepoint@2a {
