@@ -21,7 +21,8 @@
 &i2c0 {
     status = "okay";
     pinctrl-0 = <&i2c0_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 
     /* nice!view-gem Display */
     nice_view_gem: oled@3c {
