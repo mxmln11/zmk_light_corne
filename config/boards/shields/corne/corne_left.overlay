@@ -5,6 +5,7 @@
  */
 
 #include "corne.dtsi"
+#include <dt-bindings/zmk/pointing.h>
 
 &kscan0 {
     col-gpios
