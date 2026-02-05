@@ -26,6 +26,10 @@
         ;
 };
 
+/ {
+    /* Create a dummy node so the compiler doesn't crash on the 'oled' label */
+    oled: dummy_label { }; 
+};
 /* I2C Mouse/Touchpad - User Configuration
  *
  * Enable I2C drivers on this side of the keyboard.
