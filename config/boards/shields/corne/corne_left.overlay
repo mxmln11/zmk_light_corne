@@ -7,7 +7,7 @@
 #include "corne.dtsi"
 #include <dt-bindings/zmk/pointing.h>
 
-&nice_view_spi {
+&nice_view_spi0 {
     cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
 };
 
