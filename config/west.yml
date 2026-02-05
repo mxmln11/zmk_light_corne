@@ -16,6 +16,6 @@ manifest:
       revision: v0.3.0 #new entry
     - name: zmk-fingerpunch-keyboards
       remote: sadekbaroudi
-      revision: v0.3
+      revision: main
   self:
     path: config
