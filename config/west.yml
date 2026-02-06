@@ -6,6 +6,10 @@ manifest:
       url-base: https://github.com/M165437 #new entry
     - name: sadekbaroudi
       url-base: https://github.com/sadekbaroudi
+    - name: sadekbaroudi
+      url-base: https://github.com/sadekbaroudi
+    - name: sadekbaroudi
+      url-base: https://github.com/sadekbaroudi
   projects:
     - name: zmk
       remote: zmkfirmware
