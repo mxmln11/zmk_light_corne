@@ -15,11 +15,11 @@ manifest:
     - name: zmk-fingerpunch-keyboards
       url: https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards
       revision: main
-    - name: vik-core
-      url: https://github.com/sadekbaroudi/vik-core
+    - name: zmk-fingerpunch-vik
+      url: https://github.com/sadekbaroudi/zmk-fingerpunch-vik
       revision: main
-    - name: fingerpunch-controllers
-      url: https://github.com/sadekbaroudi/fingerpunch-controllers
+    - name: zmk-fingerpunch-controllers
+      url: https://github.com/sadekbaroudi/zmk-fingerpunch-controllers
       revision: main
   self:
     path: config
