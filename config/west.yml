@@ -14,14 +14,6 @@ manifest:
     - name: nice-view-gem #new entry
       remote: m165437 #new entry
       revision: v0.3.0 #new entry
-    - name: zmk-fingerpunch-keyboards
-      remote: sadekbaroudi
-      revision: main
-    - name: vik-core
-      remote: sadekbaroudi
-      revision: main
-    - name: fingerpunch-controllers
-      remote: sadekbaroudi
-      revision: main
+
   self:
     path: config
