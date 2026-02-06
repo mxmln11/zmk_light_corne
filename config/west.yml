@@ -6,6 +6,8 @@ manifest:
     #  url-base: https://github.com/
     - name: m165437 #new entry
       url-base: https://github.com/M165437 #new entry
+    - name: sadekbaroudi
+      url-base: https://github.com/sadekbaroudi
 
   projects:
     - name: zmk
@@ -18,6 +20,16 @@ manifest:
     - name: nice-view-gem #new entry
       remote: m165437 #new entry
       revision: v0.3.0 #main #new entry
+    - name: zmk-fingerpunch-keyboards
+      remote: sadekbaroudi
+      revision: main
+    - name: vik-core
+      remote: sadekbaroudi
+      revision: main
+    - name: fingerpunch-controllers
+      remote: sadekbaroudi
+      revision: main
+    
       
   self:
     path: config
