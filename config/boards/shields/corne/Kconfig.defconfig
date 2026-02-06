@@ -9,7 +9,7 @@
 # pointing device is connected to.
 
 #if SHIELD_CORNE_RIGHT
-  #config ZMK_SPLIT_ROLE_CENTRAL
+  # config ZMK_SPLIT_ROLE_CENTRAL
   #    default y
   
 #endif
@@ -21,10 +21,10 @@ if SHIELD_CORNE_LEFT || SHIELD_CORNE_RIGHT
   config I2C
         default y
 
-  #if ZMK_DISPLAY
+  # if ZMK_DISPLAY
   #  config SSD1306
   #      default y
-  #endif # ZMK_DISPLAY
+  # endif # ZMK_DISPLAY
   
   if LVGL
     config LV_Z_VDB_SIZE
