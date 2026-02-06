@@ -102,7 +102,7 @@
     pinctrl-names = "default", "sleep";
 
     glidepoint: glidepoint@2a {
-        compatible = "cirque,glidepoint";
+        compatible = "cirque,pinnacle";
         reg = <0x2a>;
         dr-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // TP7?
 		sensitivity = "12";
