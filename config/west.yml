@@ -13,13 +13,13 @@ manifest:
       remote: m165437 #new entry
       revision: v0.3.0 #main #new entry
     - name: zmk-fingerpunch-keyboards
-      url: https://github.com/sadekbaroudi
+      url: https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards
       revision: main
     - name: vik-core
-      url: https://github.com/sadekbaroudi
+      url: https://github.com/sadekbaroudi/vik-core
       revision: main
     - name: fingerpunch-controllers
-      url: https://github.com/sadekbaroudi
+      url: https://github.com/sadekbaroudi/fingerpunch-controllers
       revision: main
   self:
     path: config
