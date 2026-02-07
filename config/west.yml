@@ -18,6 +18,9 @@ manifest:
     - name: zmk-fingerpunch-keyboards
       remote: sadekbaroudi #url: https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards
       revision: main
+    - name: zmk-fingerpunch-controllers
+      remote: sadekebaroudi
+      revision: main
 
   self:
     path: config
