@@ -4,8 +4,10 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: m165437 #new entry
       url-base: https://github.com/M165437 #new entry
-    - name: sadekbaroudi
-      url-base: https://github.com/sadekbaroudi
+    # - name: sadekbaroudi
+    #  url-base: https://github.com/sadekbaroudi
+    - name: aym1607
+      url-base: https://github.com/aym1607
       
   projects:
     - name: zmk
@@ -15,16 +17,9 @@ manifest:
     - name: nice-view-gem #new entry
       remote: m165437 #new entry
       revision: v0.3.0 #main #new entry
-    - name: zmk-fingerpunch-keyboards
-      remote: sadekbaroudi #url: https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards
+    - name: zmk-driver-azoteq-iqs5xx
+      remote: aym1607
       revision: main
-    - name: zmk-fingerpunch-controllers
-      remote: sadekbaroudi
-      revision: main
-    - name: zmk-fingerpunch-vik
-      remote: sadekbaroudi
-      revision: main
-      import: config/deps.yml
 
   self:
     path: config
