@@ -96,16 +96,16 @@
     };
 };
 
-// &i2c0 {
-&pro_micro_i2c {
+// &pro_micro_i2c {
+&i2c0 {
 	status = "okay";
     pinctrl-0 = <&i2c0_default>;
     pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
 
-    glidepoint: glidepoint@2a {
-        compatible = "cirque,pinnacle";
-        reg = <0x2a>;
+    touchpad: iqs5xx@74 {
+        compatible = "azoteq,iqs5xx";
+        reg = <0x74>;
         dr-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // TP7?
 		sensitivity = "12";
     };
@@ -129,7 +129,7 @@
         touchpad_split: touchpad_split@0 {
             compatible = "zmk,input-split";
             reg = <0>; // Unique ID for this peripheral pointer
-            device = <&glidepoint>;
+            device = <&touchpad>;
         };
     };
 };
