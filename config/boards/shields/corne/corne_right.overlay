@@ -108,7 +108,8 @@
         reg = <0x74>;
         /* The specific property required by this driver */
         interrupt-parent = <&gpio0>;
-        interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
+    	/* Use raw integers: 8 is the pin, 1 is the trigger flag */
+    	interrupts = <8 1>; 
 
     	touchscreen-size-x = <1024>;
     	touchscreen-size-y = <512>;
