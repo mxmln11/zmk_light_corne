@@ -2,7 +2,7 @@ artifacts/
 nice-view-gem/
 modules/
 build/
-zeyphyr/
+zephyr/
 zmk/
 .venv/
 .west/
