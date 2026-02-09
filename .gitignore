@@ -1,0 +1,8 @@
+artifacts/
+nice-view-gem/
+modules/
+build/
+zephyr
+zmk
+.venv
+.west
