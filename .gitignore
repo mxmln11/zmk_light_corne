@@ -4,5 +4,6 @@ modules/
 build/
 zephyr
 zmk
+zmk-driver-azoteq-igs5xx/
 .venv
 .west
